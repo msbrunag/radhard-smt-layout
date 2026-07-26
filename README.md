@@ -1,6 +1,6 @@
-# radhard-smt-layout
+# SMT-Based Symbolic Transistor Placement with User-Defined Node Spacing Constraints
 
-**SMT-based symbolic transistor placement with user-defined node spacing constraints for RHBD-aware standard-cell layout generation.**
+**An open-source EDA framework for Radiation Hardening by Design (RHBD) using Satisfiability Modulo Theories (SMT).**
 
 ## Overview
 
