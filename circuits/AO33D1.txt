@@ -1,0 +1,23 @@
+* Cell: AO33_D1 (And-Or-Invert 3-3)
+.SUBCKT AO33_D1 A B C D E F Z VDD VSS
+
+* Stage 1: AOI Logic (Internal node N1)
+MP1 N2 A VDD VDD pmos W=1.0u L=50n
+MP2 N2 B VDD VDD pmos W=1.0u L=50n
+MP3 N2 C VDD VDD pmos W=1.0u L=50n
+MP4 N1 D N2  VDD pmos W=1.0u L=50n
+MP5 N1 E N2  VDD pmos W=1.0u L=50n
+MP6 N1 F N2  VDD pmos W=1.0u L=50n
+
+MN1 N1 A N3  VSS nmos W=1.0u L=50n
+MN2 N3 B N4  VSS nmos W=1.0u L=50n
+MN3 N4 C VSS VSS nmos W=1.0u L=50n
+MN4 N1 D N5  VSS nmos W=1.0u L=50n
+MN5 N5 E N6  VSS nmos W=1.0u L=50n
+MN6 N6 F VSS VSS nmos W=1.0u L=50n
+
+* Stage 2: Output Inverter
+MP7 Z N1 VDD VDD pmos W=2.0u L=50n
+MN7 Z N1 VSS VSS nmos W=1.0u L=50n
+
+.ENDS AO33_D1

@@ -1,0 +1,23 @@
+* SPICE Netlist - OAI322_D1 -> Y = ((A+B+C)*(D+E)*(F*G))!
+
+*** Rede Pull-Up PMOS ***
+MP_A n_p11 A VDD   VDD P
+MP_B n_p12 B n_p11 VDD P
+MP_C Y     C n_p12 VDD P
+
+MP_D n_p2  D VDD  VDD P
+MP_E Y     E n_p2 VDD P
+
+MP_F n_p3  F VDD   VDD P
+MP_G Y     G n_p3  VDD P
+
+*** Rede Pull-Down NMOS ***
+MN_A n_i1 A GND  GND N
+MN_B n_i1 B GND  GND N
+MN_C n_i1 C GND  GND N
+
+MN_D n_i2 D n_i1 GND N
+MN_E n_i2 E n_i1 GND N
+
+MN_F Y    F n_i2 GND N
+MN_G Y    G n_i2 GND N

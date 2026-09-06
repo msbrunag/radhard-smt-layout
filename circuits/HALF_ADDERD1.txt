@@ -1,0 +1,44 @@
+* Cell: HALF_ADDER_D1 (26 Transistors)
+
+.SUBCKT HALF_ADDER_D1 A B S COUT VDD VSS
+
+* Inverters for Inputs A and B
+MP1 N1 A VDD VDD pmos W=1.0u L=50n
+MN1 N1 A VSS VSS nmos W=1.0u L=50n
+MP2 N2 B VDD VDD pmos W=1.0u L=50n
+MN2 N2 B VSS VSS nmos W=1.0u L=50n
+
+* XOR Logic (A'B + AB') for SUM Generation
+* Term 1: A' * B
+MP3 N3 N1 VDD VDD pmos W=1.0u L=50n
+MP4 N3 B  VDD VDD pmos W=1.0u L=50n
+MN3 N3 N1 N4  VSS nmos W=1.0u L=50n
+MN4 N4 B  VSS VSS nmos W=1.0u L=50n
+MP5 N5 N3 VDD VDD pmos W=1.0u L=50n
+MN5 N5 N3 VSS VSS nmos W=1.0u L=50n
+
+* Term 2: A * B'
+MP6 N6 A  VDD VDD pmos W=1.0u L=50n
+MP7 N6 N2 VDD VDD pmos W=1.0u L=50n
+MN6 N6 A  N7  VSS nmos W=1.0u L=50n
+MN7 N7 N2 VSS VSS nmos W=1.0u L=50n
+MP8 N8 N6 VDD VDD pmos W=1.0u L=50n
+MN8 N8 N6 VSS VSS nmos W=1.0u L=50n
+
+* OR Gate for SUM (NOR2 + Inverter)
+MP9  N9  N5 VDD VDD pmos W=1.0u L=50n
+MP10 N10 N8 N9  VDD pmos W=1.0u L=50n
+MN9  N10 N5 VSS VSS nmos W=1.0u L=50n
+MN10 N10 N8 VSS VSS nmos W=1.0u L=50n
+MP11 S   N10 VDD VDD pmos W=2.0u L=50n
+MN11 S   N10 VSS VSS nmos W=1.0u L=50n
+
+* Carry Out (COUT = A * B)
+MP12 N11 A VDD VDD pmos W=1.0u L=50n
+MP13 N11 B VDD VDD pmos W=1.0u L=50n
+MN12 N11 A N12 VSS nmos W=1.0u L=50n
+MN13 N12 B VSS VSS nmos W=1.0u L=50n
+MP14 COUT N11 VDD VDD pmos W=2.0u L=50n
+MN14 COUT N11 VSS VSS nmos W=1.0u L=50n
+
+.ENDS HALF_ADDER_D1

@@ -1,0 +1,77 @@
+* Cell: FULL_ADDER_D1 (50 Transistors)
+
+.SUBCKT FULL_ADDER_D1 A B C COUT S VDD VSS
+
+* ----------------------------------------------------------
+* COUT Generation Block
+* ----------------------------------------------------------
+* NAND2(A,B)
+MP1 N1 A VDD VDD pmos W=1.0u L=50n
+MP2 N1 B VDD VDD pmos W=1.0u L=50n
+MN1 N1 A N2  VSS nmos W=1.0u L=50n
+MN2 N2 B VSS VSS nmos W=1.0u L=50n
+* NAND2(A,C)
+MP3 N3 A VDD VDD pmos W=1.0u L=50n
+MP4 N3 C VDD VDD pmos W=1.0u L=50n
+MN3 N3 A N4  VSS nmos W=1.0u L=50n
+MN4 N4 C VSS VSS nmos W=1.0u L=50n
+* NAND2(B,C)
+MP5 N5 B VDD VDD pmos W=1.0u L=50n
+MP6 N5 C VDD VDD pmos W=1.0u L=50n
+MN5 N5 B N6  VSS nmos W=1.0u L=50n
+MN6 N6 C VSS VSS nmos W=1.0u L=50n
+* NAND3 -> directly outputs COUT (Fixed logical inversion bug)
+MP7 COUT N1 VDD  VDD pmos W=2.0u L=50n
+MP8 COUT N3 VDD  VDD pmos W=2.0u L=50n
+MP9 COUT N5 VDD  VDD pmos W=2.0u L=50n
+MN7 COUT N1 N7   VSS nmos W=1.0u L=50n
+MN8 N7   N3 N8   VSS nmos W=1.0u L=50n
+MN9 N8   N5 VSS  VSS nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* SUM (S) Generation Block (XOR3 structure)
+* ----------------------------------------------------------
+* First XOR2 (A ^ B) - Block 1
+MP10 N9 A VDD VDD pmos W=1.0u L=50n
+MP11 N9 B VDD VDD pmos W=1.0u L=50n
+MN10 N9 A N10 VSS nmos W=1.0u L=50n
+MN11 N10 B VSS VSS nmos W=1.0u L=50n
+
+MP12 N11 A VDD VDD pmos W=1.0u L=50n
+MP13 N11 N9 VDD VDD pmos W=1.0u L=50n
+MN12 N11 A N12 VSS nmos W=1.0u L=50n
+MN13 N12 N9 VSS VSS nmos W=1.0u L=50n
+
+MP14 N13 B VDD VDD pmos W=1.0u L=50n
+MP15 N13 N9 VDD VDD pmos W=1.0u L=50n
+MN14 N13 B N14 VSS nmos W=1.0u L=50n
+MN15 N14 N9 VSS VSS nmos W=1.0u L=50n
+
+MP16 N15 N11 VDD VDD pmos W=1.0u L=50n
+MP17 N15 N13 VDD VDD pmos W=1.0u L=50n
+MN16 N15 N11 N16 VSS nmos W=1.0u L=50n
+MN17 N16 N13 VSS VSS nmos W=1.0u L=50n
+
+* Second XOR2 ((A ^ B) ^ C) - Block 2
+MP18 N17 N15 VDD VDD pmos W=1.0u L=50n
+MP19 N17 C VDD VDD pmos W=1.0u L=50n
+MN18 N17 N15 N18 VSS nmos W=1.0u L=50n
+MN19 N18 C VSS VSS nmos W=1.0u L=50n
+
+MP20 N19 N15 VDD VDD pmos W=1.0u L=50n
+MP21 N19 N17 VDD VDD pmos W=1.0u L=50n
+MN20 N19 N15 N20 VSS nmos W=1.0u L=50n
+MN21 N20 N17 VSS VSS nmos W=1.0u L=50n
+
+MP22 N21 C VDD VDD pmos W=1.0u L=50n
+MP23 N21 N17 VDD VDD pmos W=1.0u L=50n
+MN22 N21 C N22 VSS nmos W=1.0u L=50n
+MN23 N22 N17 VSS VSS nmos W=1.0u L=50n
+
+* Output S
+MP24 S N19 VDD VDD pmos W=2.0u L=50n
+MP25 S N21 VDD VDD pmos W=2.0u L=50n
+MN24 S N19 N23 VSS nmos W=1.0u L=50n
+MN25 N23 N21 VSS VSS nmos W=1.0u L=50n
+
+.ENDS FULL_ADDER_D1

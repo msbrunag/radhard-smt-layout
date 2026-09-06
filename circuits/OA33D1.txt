@@ -1,0 +1,26 @@
+* SPICE Netlist - OA33_D1 -> OA_OUT = (A+B+C) * (D+E+F)
+
+* SPICE Netlist - OAI33_D1
+
+*** Rede Pull-Up PMOS ***
+MP_A n_p11 A VDD  VDD P
+MP_B n_p12 B n_p11 VDD P
+MP_C Y     C n_p12 VDD P
+
+MP_D n_p21 D VDD  VDD P
+MP_E n_p22 E n_p21 VDD P
+MP_F Y     F n_p22 VDD P
+
+*** Rede Pull-Down NMOS ***
+MN_A n_inter A GND GND N
+MN_B n_inter B GND GND N
+MN_C n_inter C GND GND N
+
+MN_D Y       D n_inter GND N
+MN_E Y       E n_inter GND N
+MN_F Y       F n_inter GND N
+
+*** PORTA INVERSORA NA SAÍDA ***
+
+MP_INV OA_OUT Y VDD VDD P
+MN_INV OA_OUT Y GND GND N

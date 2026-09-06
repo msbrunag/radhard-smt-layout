@@ -1,0 +1,21 @@
+* SPICE Netlist - OA21_D1 (Porta Complexa Direta com Inversor de Saída)
+* Equação: OA_OUT = (A + B) * C
+
+*** --- ESTÁGIO 1: CORPO INTERNO OAI21 (Gera o sinal invertido no nó NET_INTER) --- ***
+
+* Pull-Up PMOS (A e B em série, em paralelo com C)
+MP_A n_p1      A VDD      VDD P
+MP_B NET_INTER B n_p1     VDD P
+MP_C NET_INTER C VDD      VDD P
+
+* Pull-Down NMOS (A e B em paralelo, em série com C)
+MN_A n_n1      A GND      GND N
+MN_B n_n1      B GND      GND N
+MN_C NET_INTER C n_n1     GND N
+
+
+*** --- ESTÁGIO 2: INVERSOR DE SAÍDA (Desfaz a inversão e entrega o sinal direto) --- ***
+* Transforma o resultado de !((A+B)*C) para ((A+B)*C)
+
+MP_INV OA_OUT NET_INTER VDD VDD P
+MN_INV OA_OUT NET_INTER GND GND N

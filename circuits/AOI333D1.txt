@@ -1,0 +1,27 @@
+* Cell: AOI333_D1 (18 Transistors)
+
+.SUBCKT AOI333_D1 A B C D E F G H I Z VDD VSS
+
+* Pull-Up Network: (A||B||C) -> (D||E||F) -> (G||H||I)
+MP1 N1 A VDD VDD pmos W=1.0u L=50n
+MP2 N1 B VDD VDD pmos W=1.0u L=50n
+MP3 N1 C VDD VDD pmos W=1.0u L=50n
+MP4 N2 D N1  VDD pmos W=1.0u L=50n
+MP5 N2 E N1  VDD pmos W=1.0u L=50n
+MP6 N2 F N1  VDD pmos W=1.0u L=50n
+MP7 Z  G N2  VDD pmos W=1.0u L=50n
+MP8 Z  H N2  VDD pmos W=1.0u L=50n
+MP9 Z  I N2  VDD pmos W=1.0u L=50n
+
+* Pull-Down Network: (A*B*C) || (D*E*F) || (G*H*I)
+MN1 Z  A N3  VSS nmos W=1.0u L=50n
+MN2 N3 B N4  VSS nmos W=1.0u L=50n
+MN3 N4 C VSS VSS nmos W=1.0u L=50n
+MN4 Z  D N5  VSS nmos W=1.0u L=50n
+MN5 N5 E N6  VSS nmos W=1.0u L=50n
+MN6 N6 F VSS VSS nmos W=1.0u L=50n
+MN7 Z  G N7  VSS nmos W=1.0u L=50n
+MN8 N7 H N8  VSS nmos W=1.0u L=50n
+MN9 N8 I VSS VSS nmos W=1.0u L=50n
+
+.ENDS AOI333_D1

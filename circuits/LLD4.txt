@@ -1,0 +1,37 @@
+* Cell: LL_D4 (Latch Low, Drive Strength = 4, 20 Transistors)
+
+.SUBCKT LL_D4 D CLK Q VDD VSS
+
+* Gerador de Clock Interno
+MP1 CKN CLK VDD VDD pmos W=1.0u L=50n
+MN1 CKN CLK VSS VSS nmos W=1.0u L=50n
+MP2 CKP CKN VDD VDD pmos W=1.0u L=50n
+MN2 CKP CKN VSS VSS nmos W=1.0u L=50n
+
+* Porta de Transmissao de Entrada (Abre quando CLK=0)
+MP3 N1 CKP D VDD pmos W=1.0u L=50n
+MN3 N1 CKN D VSS nmos W=1.0u L=50n
+
+* Inversor Direto
+MP4 N2 N1 VDD VDD pmos W=1.0u L=50n
+MN4 N2 N1 VSS VSS nmos W=1.0u L=50n
+
+* Inversor de Realimentacao
+MP5 N3 N2 VDD VDD pmos W=1.0u L=50n
+MN5 N3 N2 VSS VSS nmos W=1.0u L=50n
+
+* Porta de Transmissao de Feedback (Fecha a malha quando CLK=1)
+MP6 N1 CKN N3 VDD pmos W=1.0u L=50n
+MN6 N1 CKP N3 VSS nmos W=1.0u L=50n
+
+* Buffer de Saida D4
+MP7 Q N2 VDD VDD pmos W=2.0u L=50n
+MN7 Q N2 VSS VSS nmos W=1.0u L=50n
+MP8 Q N2 VDD VDD pmos W=2.0u L=50n
+MN8 Q N2 VSS VSS nmos W=1.0u L=50n
+MP9 Q N2 VDD VDD pmos W=2.0u L=50n
+MN9 Q N2 VSS VSS nmos W=1.0u L=50n
+MP10 Q N2 VDD VDD pmos W=2.0u L=50n
+MN10 Q N2 VSS VSS nmos W=1.0u L=50n
+
+.ENDS LL_D4

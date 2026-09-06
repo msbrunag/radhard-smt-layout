@@ -1,0 +1,23 @@
+* Cell: AOI322_D1 (14 Transistors)
+
+.SUBCKT AOI322_D1 A B C D E F G Z VDD VSS
+
+* Pull-Up Network: (A||B||C) -> (D||E) -> (F||G)
+MP1 N1 A VDD VDD pmos W=1.0u L=50n
+MP2 N1 B VDD VDD pmos W=1.0u L=50n
+MP3 N1 C VDD VDD pmos W=1.0u L=50n
+MP4 N2 D N1  VDD pmos W=1.0u L=50n
+MP5 N2 E N1  VDD pmos W=1.0u L=50n
+MP6 Z  F N2  VDD pmos W=1.0u L=50n
+MP7 Z  G N2  VDD pmos W=1.0u L=50n
+
+* Pull-Down Network: (A*B*C) || (D*E) || (F*G)
+MN1 Z  A N3  VSS nmos W=1.0u L=50n
+MN2 N3 B N4  VSS nmos W=1.0u L=50n
+MN3 N4 C VSS VSS nmos W=1.0u L=50n
+MN4 Z  D N5  VSS nmos W=1.0u L=50n
+MN5 N5 E VSS VSS nmos W=1.0u L=50n
+MN6 Z  F N6  VSS nmos W=1.0u L=50n
+MN7 N6 G VSS VSS nmos W=1.0u L=50n
+
+.ENDS AOI322_D1

@@ -1,0 +1,37 @@
+* Cell: LH_D4 (Latch High, Drive Strength = 4)
+
+.SUBCKT LH_D4 D CLK Q VDD VSS
+
+* Gerador de Clock Interno
+MP1 CLKN CLK VDD VDD pmos W=1.0u L=50n
+MN1 CLKN CLK VSS VSS nmos W=1.0u L=50n
+MP2 CLKP CLKN VDD VDD pmos W=1.0u L=50n
+MN2 CLKP CLKN VSS VSS nmos W=1.0u L=50n
+
+* Porta de Transmissão de Entrada
+MP3 N1 CLKN D VDD pmos W=1.0u L=50n
+MN3 N1 CLKP D VSS nmos W=1.0u L=50n
+
+* Inversor Direto (Forward)
+MP4 N2 N1 VDD VDD pmos W=1.0u L=50n
+MN4 N2 N1 VSS VSS nmos W=1.0u L=50n
+
+* Inversor de Realimentação (Feedback)
+MP5 N3 N2 VDD VDD pmos W=1.0u L=50n
+MN5 N3 N2 VSS VSS nmos W=1.0u L=50n
+
+* Porta de Transmissão de Feedback
+MP6 N1 CLKP N3 VDD pmos W=1.0u L=50n
+MN6 N1 CLKN N3 VSS nmos W=1.0u L=50n
+
+* Buffer de Saída D4 (Quadruplicado)
+MP7 Q N2 VDD VDD pmos W=2.0u L=50n
+MN7 Q N2 VSS VSS nmos W=1.0u L=50n
+MP8 Q N2 VDD VDD pmos W=2.0u L=50n
+MN8 Q N2 VSS VSS nmos W=1.0u L=50n
+MP9 Q N2 VDD VDD pmos W=2.0u L=50n
+MN9 Q N2 VSS VSS nmos W=1.0u L=50n
+MP10 Q N2 VDD VDD pmos W=2.0u L=50n
+MN10 Q N2 VSS VSS nmos W=1.0u L=50n
+
+.ENDS LH_D4

@@ -1,0 +1,79 @@
+* SPICE Netlist - SDFF_D1 (Scan D Flip-Flop com Portas de Transmissão)
+* Pinos: D (Dado), SI (Scan In), SE (Scan Enable), CLK (Clock), Q (Saída)
+
+* =======================================================
+* 1. GERADORES DE SINAIS INVERTIDOS (CONTROLE INTERNO)
+* =======================================================
+* Inversor para Scan Enable (Gera SEN)
+MP_SE1  SEN SE  VDD VDD P
+MN_SE1  SEN SE  GND GND N
+
+* Inversor para Clock (Gera CLKN)
+MP_CLK1 CLKN CLK VDD VDD P
+MN_CLK1 CLKN CLK GND GND N
+
+
+* =======================================================
+* 2. ESTÁGIO MULTIPLEXADOR DE ENTRADA (Mux 2:1 via TG)
+* =======================================================
+* TG_D: Passa a entrada D quando SE = 0 (SEN = 1) -> Conecta ao nó MUX_OUT
+MP_TGD  MUX_OUT SE  D   VDD P
+MN_TGD  MUX_OUT SEN D   GND N
+
+* TG_SI: Passa a entrada SI quando SE = 1 (SEN = 0) -> Conecta ao nó MUX_OUT
+MP_TGSI MUX_OUT SEN SI  VDD P
+MN_TGSI MUX_OUT SE  SI  GND N
+
+
+* =======================================================
+* 3. ESTÁGIO MASTER LATCH (Trava Principal)
+* =======================================================
+* TG_M1: Passa o sinal MUX_OUT para dentro do Master quando CLK = 0 (CLKN = 1)
+
+MP_TM1  n_m1 CLK  MUX_OUT VDD P
+MN_TM1  n_m1 CLKN MUX_OUT GND N
+
+* Inversor de armazenamento direto do Master
+MP_IM1  n_m2 n_m1 VDD     VDD P
+MN_IM1  n_m2 n_m1 GND     GND N
+
+* Inversor de realimentação do Master (Mantém o estado)
+MP_IM2  n_m3 n_m2 VDD     VDD P
+MN_IM2  n_m3 n_m2 GND     GND N
+
+* TG_M2: Fecha a malha de realimentação do Master quando CLK = 1 (CLKN = 0)
+MP_TM2  n_m1 CLKN n_m3    VDD P
+MN_TM2  n_m1 CLK  n_m3    GND N
+
+
+* =======================================================
+* 4. ESTÁGIO SLAVE LATCH (Trava Secundária / Saída)
+* =======================================================
+
+* TG_S1: Passa o dado armazenado no Master (n_m2) para o Slave quando CLK = 1 (CLKN = 0)
+MP_TS1  n_s1 CLKN n_m2    VDD P
+MN_TS1  n_s1 CLK  n_m2    GND N
+
+* Inversor de armazenamento direto do Slave (Gera a saída final Q)
+MP_IS1  Q    n_s1 VDD     VDD P
+MN_IS1  Q    n_s1 GND     GND N
+
+* Inversor de realimentação do Slave (Mantém o estado na saída)
+MP_IS2  n_s2 Q    VDD     VDD P
+MN_IS2  n_s2 Q    GND     GND N
+
+* TG_S2: Fecha a malha de realimentação do Slave quando CLK = 0 (CLKN = 1)
+MP_TS2  n_s1 CLK  n_s2    VDD P
+MN_TS2  n_s1 CLKN n_s2    GND N
+
+--------------------------------------------------------------------------------------------------------------
+
+**        MODO DE SELEÇÃO (MUX 2:1)           |         ESTÁGIO DE ARMAZENAMENTO (FLIP-FLOP D)
+**                                            |
+** Dado Comum (D) ───┐                        |         ┌──────────────┐      ┌──────────────┐
+**                   ├───[ Porta MUX 2:1 ] ───┼──(D_int)┤ Latch Master ├──────┤ Latch Slave  ├────► Saída (Q)
+** Scan In (SI)   ───┘           ▲            |         └──────┬───────┘      └──────┬───────┘
+**                               │            |                │                     │
+** Scan Enable (SE) ─────────────┘            |                ▲                     ▲
+**                                            |                │                     │
+** Clock (CLK) ───────────────────────────────┼────────────────┴───[ Inversor ]──────┘

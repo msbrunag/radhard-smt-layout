@@ -1,0 +1,23 @@
+* SPICE Netlist - OA32_D1 -> OA_OUT = (A + B + C) * (D * E)
+
+
+*** REDE PULL-UP: (A*B*C) + (D+E) ***
+MP_A n_p1    A VDD  VDD P
+MP_B n_p2    B n_p1 VDD P
+MP_C NET_INV C n_p2 VDD P
+
+MP_D NET_INV D VDD  VDD P
+MP_E NET_INV E VDD  VDD P
+
+*** REDE PULL-DOWN: (A+B+C) * (D*E) ***
+MN_A n_and  A GND   GND N
+MN_B n_and  B GND   GND N
+MN_C n_and  C GND   GND N
+
+MN_D n_in    D n_and GND N
+MN_E NET_INV E n_in  GND N
+
+*** PORTA INVERSORA NA SAÍDA ***
+
+MP_INV OA_OUT NET_INV VDD VDD P
+MN_INV OA_OUT NET_INV GND GND N

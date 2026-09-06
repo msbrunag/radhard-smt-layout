@@ -1,0 +1,39 @@
+* Cell: MUX2_D2 (Drive Strength = 2, 24 Transistors)
+
+.SUBCKT MUX2_D2 A B S Z VDD VSS
+
+* Inversor do Select (Duplo)
+MP1 SN S VDD VDD pmos W=1.0u L=50n
+MP2 SN S VDD VDD pmos W=1.0u L=50n
+MN1 SN S VSS VSS nmos W=1.0u L=50n
+MN2 SN S VSS VSS nmos W=1.0u L=50n
+
+* Rede Pull-Up
+MP3 N3 B VDD VDD pmos W=1.0u L=50n
+MP4 N3 B VDD VDD pmos W=1.0u L=50n
+MP5 N1 SN N3 VDD pmos W=1.0u L=50n
+MP6 N1 SN N3 VDD pmos W=1.0u L=50n
+
+MP7 N2 A VDD VDD pmos W=1.0u L=50n
+MP8 N2 A VDD VDD pmos W=1.0u L=50n
+MP9 N1 S N2  VDD pmos W=1.0u L=50n
+MP10 N1 S N2 VDD pmos W=1.0u L=50n
+
+* Rede Pull-Down
+MN3 N1 A N4 VSS nmos W=1.0u L=50n
+MN4 N1 A N4 VSS nmos W=1.0u L=50n
+MN5 N1 S N4 VSS nmos W=1.0u L=50n
+MN6 N1 S N4 VSS nmos W=1.0u L=50n
+
+MN7  N4 B  VSS VSS nmos W=1.0u L=50n
+MN8  N4 B  VSS VSS nmos W=1.0u L=50n
+MN9  N4 SN VSS VSS nmos W=1.0u L=50n
+MN10 N4 SN VSS VSS nmos W=1.0u L=50n
+
+* Inversor de Saida
+MP11 Z N1 VDD VDD pmos W=2.0u L=50n
+MP12 Z N1 VDD VDD pmos W=2.0u L=50n
+MN11 Z N1 VSS VSS nmos W=1.0u L=50n
+MN12 Z N1 VSS VSS nmos W=1.0u L=50n
+
+.ENDS MUX2_D2

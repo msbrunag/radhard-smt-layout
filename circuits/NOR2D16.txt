@@ -1,0 +1,137 @@
+* ==========================================================
+* Cell: NOR2_D16 (Expanded Parallel Topology)
+* Description: 2-input NOR gate with Drive Strength = 16 
+* Number of transistors: 64
+* ==========================================================
+
+.SUBCKT NOR2_D16 A B OUT VDD GND
+
+* ----------------------------------------------------------
+* Instance 1 (Parallel Branch 1)
+* ----------------------------------------------------------
+MP1_01 net_x01 A VDD VDD pmos W=1.0u L=50n
+MP2_01 OUT B net_x01 VDD pmos W=1.0u L=50n
+MN1_01 OUT A GND GND nmos W=1.0u L=50n
+MN2_01 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 2 (Parallel Branch 2)
+* ----------------------------------------------------------
+MP1_02 net_x02 A VDD VDD pmos W=1.0u L=50n
+MP2_02 OUT B net_x02 VDD pmos W=1.0u L=50n
+MN1_02 OUT A GND GND nmos W=1.0u L=50n
+MN2_02 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 3 (Parallel Branch 3)
+* ----------------------------------------------------------
+MP1_03 net_x03 A VDD VDD pmos W=1.0u L=50n
+MP2_03 OUT B net_x03 VDD pmos W=1.0u L=50n
+MN1_03 OUT A GND GND nmos W=1.0u L=50n
+MN2_03 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 4 (Parallel Branch 4)
+* ----------------------------------------------------------
+MP1_04 net_x04 A VDD VDD pmos W=1.0u L=50n
+MP2_04 OUT B net_x04 VDD pmos W=1.0u L=50n
+MN1_04 OUT A GND GND nmos W=1.0u L=50n
+MN2_04 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 5 (Parallel Branch 5)
+* ----------------------------------------------------------
+MP1_05 net_x05 A VDD VDD pmos W=1.0u L=50n
+MP2_05 OUT B net_x05 VDD pmos W=1.0u L=50n
+MN1_05 OUT A GND GND nmos W=1.0u L=50n
+MN2_05 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 6 (Parallel Branch 6)
+* ----------------------------------------------------------
+MP1_06 net_x06 A VDD VDD pmos W=1.0u L=50n
+MP2_06 OUT B net_x06 VDD pmos W=1.0u L=50n
+MN1_06 OUT A GND GND nmos W=1.0u L=50n
+MN2_06 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 7 (Parallel Branch 7)
+* ----------------------------------------------------------
+MP1_07 net_x07 A VDD VDD pmos W=1.0u L=50n
+MP2_07 OUT B net_x07 VDD pmos W=1.0u L=50n
+MN1_07 OUT A GND GND nmos W=1.0u L=50n
+MN2_07 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 8 (Parallel Branch 8)
+* ----------------------------------------------------------
+MP1_08 net_x08 A VDD VDD pmos W=1.0u L=50n
+MP2_08 OUT B net_x08 VDD pmos W=1.0u L=50n
+MN1_08 OUT A GND GND nmos W=1.0u L=50n
+MN2_08 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 9 (Parallel Branch 9)
+* ----------------------------------------------------------
+MP1_09 net_x09 A VDD VDD pmos W=1.0u L=50n
+MP2_09 OUT B net_x09 VDD pmos W=1.0u L=50n
+MN1_09 OUT A GND GND nmos W=1.0u L=50n
+MN2_09 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 10 (Parallel Branch 10)
+* ----------------------------------------------------------
+MP1_10 net_x10 A VDD VDD pmos W=1.0u L=50n
+MP2_10 OUT B net_x10 VDD pmos W=1.0u L=50n
+MN1_10 OUT A GND GND nmos W=1.0u L=50n
+MN2_10 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 11 (Parallel Branch 11)
+* ----------------------------------------------------------
+MP1_11 net_x11 A VDD VDD pmos W=1.0u L=50n
+MP2_11 OUT B net_x11 VDD pmos W=1.0u L=50n
+MN1_11 OUT A GND GND nmos W=1.0u L=50n
+MN2_11 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 12 (Parallel Branch 12)
+* ----------------------------------------------------------
+MP1_12 net_x12 A VDD VDD pmos W=1.0u L=50n
+MP2_12 OUT B net_x12 VDD pmos W=1.0u L=50n
+MN1_12 OUT A GND GND nmos W=1.0u L=50n
+MN2_12 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 13 (Parallel Branch 13)
+* ----------------------------------------------------------
+MP1_13 net_x13 A VDD VDD pmos W=1.0u L=50n
+MP2_13 OUT B net_x13 VDD pmos W=1.0u L=50n
+MN1_13 OUT A GND GND nmos W=1.0u L=50n
+MN2_13 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 14 (Parallel Branch 14)
+* ----------------------------------------------------------
+MP1_14 net_x14 A VDD VDD pmos W=1.0u L=50n
+MP2_14 OUT B net_x14 VDD pmos W=1.0u L=50n
+MN1_14 OUT A GND GND nmos W=1.0u L=50n
+MN2_14 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 15 (Parallel Branch 15)
+* ----------------------------------------------------------
+MP1_15 net_x15 A VDD VDD pmos W=1.0u L=50n
+MP2_15 OUT B net_x15 VDD pmos W=1.0u L=50n
+MN1_15 OUT A GND GND nmos W=1.0u L=50n
+MN2_15 OUT B GND GND nmos W=1.0u L=50n
+
+* ----------------------------------------------------------
+* Instance 16 (Parallel Branch 16)
+* ----------------------------------------------------------
+MP1_16 net_x16 A VDD VDD pmos W=1.0u L=50n
+MP2_16 OUT B net_x16 VDD pmos W=1.0u L=50n
+MN1_16 OUT A GND GND nmos W=1.0u L=50n
+MN2_16 OUT B GND GND nmos W=1.0u L=50n
+
+.ENDS NOR2_D16

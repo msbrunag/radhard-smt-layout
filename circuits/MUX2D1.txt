@@ -1,0 +1,25 @@
+* Cell: MUX2_D1 (Drive Strength = 1, 12 Transistors)
+
+.SUBCKT MUX2_D1 A B S Z VDD VSS
+
+* Inversor do Select
+MP1 SN S VDD VDD pmos W=1.0u L=50n
+MN1 SN S VSS VSS nmos W=1.0u L=50n
+
+* Rede Pull-Up
+MP2 N3 B  VDD VDD pmos W=1.0u L=50n
+MP3 N1 SN N3  VDD pmos W=1.0u L=50n
+MP4 N2 A  VDD VDD pmos W=1.0u L=50n
+MP5 N1 S  N2  VDD pmos W=1.0u L=50n
+
+* Rede Pull-Down
+MN2 N1 A  N4  VSS nmos W=1.0u L=50n
+MN3 N1 S  N4  VSS nmos W=1.0u L=50n
+MN4 N4 B  VSS VSS nmos W=1.0u L=50n
+MN5 N4 SN VSS VSS nmos W=1.0u L=50n
+
+* Inversor de Saida
+MP6 Z N1 VDD VDD pmos W=2.0u L=50n
+MN6 Z N1 VSS VSS nmos W=1.0u L=50n
+
+.ENDS MUX2_D1

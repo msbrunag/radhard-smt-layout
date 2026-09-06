@@ -1,0 +1,106 @@
+* =========================================================================
+* CIRCUITO TMR: 3x FLIP-FLOPS + CÉLULA VOTADORA DE 12 TRANSISTORES
+* =========================================================================
+
+* -------------------------------------------------------------------------
+* ESTÁGIO 1: FLIP-FLOP 1 (Master-Slave Flat - ~20 transistores)
+* Entradas: in1, clk | Saídas: out1, out1_bar
+* -------------------------------------------------------------------------
+* Inversor de Clock 1
+MN_clk1_inv clk_bar clk VSS VSS NMOS
+MP_clk1_inv clk_bar clk VDD VDD PMOS
+
+* Master Latch - Amostragem
+MN_m1_pass in1 clk_bar m1_node VSS NMOS
+MP_m1_pass in1 clk     m1_node VDD PMOS
+MN_m1_inv1 m1_bar m1_node VSS VSS NMOS
+MP_m1_inv1 m1_bar m1_node VDD VDD PMOS
+MN_m1_inv2 m1_node m1_bar VSS VSS NMOS
+MP_m1_inv2 m1_node m1_bar VDD VDD PMOS
+
+* Slave Latch - Transferência
+MN_s1_pass m1_bar clk s1_node VSS NMOS
+MP_s1_pass m1_bar clk_bar s1_node VDD PMOS
+MN_s1_inv1 out1_bar s1_node VSS VSS NMOS
+MP_s1_inv1 out1_bar s1_node VDD VDD PMOS
+MN_s1_inv2 s1_node out1_bar VSS VSS NMOS
+MP_s1_inv2 s1_node out1_bar VDD VDD PMOS
+
+* Inversor de Saída (Gera o out1 verdadeiro)
+MN_out1 out1 out1_bar VSS VSS NMOS
+MP_out1 out1 out1_bar VDD VDD PMOS
+
+
+* -------------------------------------------------------------------------
+* ESTÁGIO 2: FLIP-FLOP 2 (Master-Slave Flat)
+* Entradas: in2, clk | Saídas: out2, out2_bar
+* -------------------------------------------------------------------------
+MN_clk2_inv clk_bar2 clk VSS VSS NMOS
+MP_clk2_inv clk_bar2 clk VDD VDD PMOS
+
+MN_m2_pass in2 clk_bar2 m2_node VSS NMOS
+MP_m2_pass in2 clk      m2_node VDD PMOS
+MN_m2_inv1 m2_bar m2_node VSS VSS NMOS
+MP_m2_inv1 m2_bar m2_node VDD VDD PMOS
+MN_m2_inv2 m2_node m2_bar VSS VSS NMOS
+MP_m2_inv2 m2_node m2_bar VDD VDD PMOS
+
+MN_s2_pass m2_bar clk s2_node VSS NMOS
+MP_s2_pass m2_bar clk_bar2 s2_node VDD PMOS
+MN_s2_inv1 out2_bar s2_node VSS VSS NMOS
+MP_s2_inv1 out2_bar s2_node VDD VDD PMOS
+MN_s2_inv2 s2_node out2_bar VSS VSS NMOS
+MP_s2_inv2 s2_node out2_bar VDD VDD PMOS
+
+MN_out2 out2 out2_bar VSS VSS NMOS
+MP_out2 out2 out2_bar VDD VDD PMOS
+
+
+* -------------------------------------------------------------------------
+* ESTÁGIO 3: FLIP-FLOP 3 (Master-Slave Flat)
+* Entradas: in3, clk | Saídas: out3, out3_bar
+* -------------------------------------------------------------------------
+MN_clk3_inv clk_bar3 clk VSS VSS NMOS
+MP_clk3_inv clk_bar3 clk VDD VDD PMOS
+
+MN_m3_pass in3 clk_bar3 m3_node VSS NMOS
+MP_m3_pass in3 clk      m3_node VDD PMOS
+MN_m3_inv1 m3_bar m3_node VSS VSS NMOS
+MP_m3_inv1 m3_bar m3_node VDD VDD PMOS
+MN_m3_inv2 m3_node m3_bar VSS VSS NMOS
+MP_m3_inv2 m3_node m3_bar VDD VDD PMOS
+
+MN_s3_pass m3_bar clk s3_node VSS NMOS
+MP_s3_pass m3_bar clk_bar3 s3_node VDD PMOS
+MN_s3_inv1 out3_bar s3_node VSS VSS NMOS
+MP_s3_inv1 out3_bar s3_node VDD VDD PMOS
+MN_s3_inv2 s3_node out3_bar VSS VSS NMOS
+MP_s3_inv2 s3_node out3_bar VDD VDD PMOS
+
+MN_out3 out3 out3_bar VSS VSS NMOS
+MP_out3 out3 out3_bar VDD VDD PMOS
+
+
+* -------------------------------------------------------------------------
+* ESTÁGIO 4: CÉLULA VOTADORA
+* Conectada diretamente às saídas out1_bar, out2_bar, out3_bar
+* -------------------------------------------------------------------------
+* REDE PULL-UP (PMOS)
+MP1 net_p1 out1_bar VDD VDD PMOS
+MP2 OUT    out2_bar net_p1 VDD PMOS
+
+MP3 net_p2 out3_bar VDD VDD PMOS
+MP4 OUT    out1_bar net_p2 VDD PMOS
+
+MP5 net_p3 out2_bar VDD VDD PMOS
+MP6 OUT    out3_bar net_p3 VDD PMOS
+
+* REDE PULL-DOWN (NMOS)
+MN1 net_n1 out2_bar VSS VSS NMOS
+MN2 OUT    out1_bar net_n1 VSS NMOS
+
+MN3 net_n2 out1_bar VSS VSS NMOS
+MN4 OUT    out3_bar net_n2 VSS NMOS
+
+MN5 net_n3 out3_bar VSS VSS NMOS
+MN6 OUT    out2_bar net_n3 VSS NMOS
